@@ -36,10 +36,11 @@ int execute(char *contentt, stack_t **headr, unsigned int counters, FILE *file)
 	bus.argg = strtok(NULL, " \n\t");
 	while (opst[x].opcode && opd)
 	{
-	if (strcmp(opd, opst[x].opcode) == 0)
-		opst[x].f(headr, counters);
+		if (strcmp(opd, opst[x].opcode) == 0)
+		{ opst[x].f(headr, counters);
 		return (0);
-	x++;
+		}
+		x++;
 	}
 	if (opd && opst[x].opcode == NULL)
 	{ fprintf(stderr, "L%d: unknown instruction %s\n", counters, opd);
