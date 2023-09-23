@@ -1,6 +1,43 @@
 #include "monty.h"
 
 bus_t bus = {NULL, NULL, NULL, 0};
+
+/**
+ * getline - A function that gets the info of a line
+ * @contents: the contents
+ * @sizez: the size
+ * @file: the file
+ * Return: 0 (successful)
+ */
+
+size_t getline(char **contents, size_t *sizez, FILE *file)
+
+{
+	size_t leng = 0;
+	char x;
+
+	*sizez = 128;
+	*contents = malloc(*sizez);
+	if (*contents == NULL)
+	{
+	return -1;
+	}
+	while ((x = fgetc(file)) != EOF && x != '\n')
+	{
+	if (leng == *sizez - 1)
+	{
+	*sizez *= 2;
+	*contents = realloc(*contents, *sizez);
+	if (*contents == NULL)
+	{
+	return -1;
+	}}
+	(*contents)[leng++] = x;
+	}
+	(*contents)[leng] = '\0';
+	return leng;
+}
+
 /**
  * main - A function of monty code interpreter
  * @argc: the number of the arguments
